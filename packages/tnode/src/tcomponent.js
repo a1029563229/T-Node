@@ -1,10 +1,9 @@
 class TComponent {
-    constructor(props) {
+    constructor(props, updater) {
         this.props = props || {};
+        this.updater = {};
         this.state = {};
         this.element = {};
-
-        this.init();
     }
 
     setState(updater) {
@@ -21,7 +20,8 @@ class TComponent {
         }
     }
 
-    init() {
+    init(updater) {
+        this.updater = updater;
         this.element = this.render();
     }
 }

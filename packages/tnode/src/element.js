@@ -19,7 +19,7 @@ TElement.prototype.setTag = function(tag) {
     }
     this.tag = tag.name || tag.displayName;
     this.tagType = TAG_TYPE.COMPONENT;
-    this.ref = new tag();
+    this.Tag = tag;
 }
 
 TElement.prototype.setAttributes = function() {

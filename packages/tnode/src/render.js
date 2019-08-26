@@ -1,5 +1,6 @@
 import { isPrimitive } from './utils';
 import { TAG_TYPE } from './element';
+import Updater from './updater';
 
 function generateRootContainer() {
     const body = document.body;
@@ -11,6 +12,9 @@ function generateRootContainer() {
 
 function getDomTree(element, parentNode) {
     if (element.tagType === TAG_TYPE.COMPONENT) {
+        const updater = new Updater();
+        element.ref = new element.Tag(element.props);
+        element.ref.init(updater);
         return getDomTree(element.ref.element);
     }
 
