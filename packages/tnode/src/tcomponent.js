@@ -1,3 +1,5 @@
+import Updater from './updater';
+
 class TComponent {
     constructor(props, updater) {
         this.props = props || {};
@@ -6,23 +8,25 @@ class TComponent {
         this.element = {};
     }
 
-    setState(updater) {
+    setState(partialState) {
         let updateData;
-        if (typeof updater === 'function') {
-            updateData = updater();
+        if (typeof partialState === 'function') {
+            updateData = partialState();
         } else {
-            updateData = updater;
+            updateData = partialState;
         }
 
         this.state = {
             ...this.state,
             ...updateData
         }
+        this.updater.queueUpdate(this.render());
     }
 
-    init(updater) {
-        this.updater = updater;
+    init() {
         this.element = this.render();
+        const updater = new Updater(this.element);
+        this.updater = updater;
     }
 }
 

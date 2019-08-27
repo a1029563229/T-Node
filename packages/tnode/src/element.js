@@ -1,6 +1,22 @@
+import { isPrimitive } from './utils';
+
 export const TAG_TYPE = {
     ELEMENT: 0,
     COMPONENT: 1
+}
+
+export function setAttributes(node, props) {
+    for (let key in props) {
+        const value = props[key];
+        node.setAttribute(key, value);
+    }
+}
+
+export function setNodeContext(node, context) {
+    if (isPrimitive(context)) {
+        return node.innerText = context;
+    }
+    return node.innerText = context.join('');
 }
 
 function TElement(tag, props, children) {
@@ -26,10 +42,7 @@ TElement.prototype.setAttributes = function() {
     if (!this.el || !this.props) return;
 
     const props = this.props;
-    for (let key in props) {
-        const value = props[key];
-        this.el.setAttribute(key, value);
-    }
+    setAttributes(this.el, props);
 }
 
 function createElement(tag, props, children) {

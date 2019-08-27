@@ -18,10 +18,10 @@ class App extends TComponent {
     }
 
     render() {
-        console.log(this);
+        // console.log(this);
         const { userInfo, type } = this.state;
 
-        return TNode.createElement('ul', { class: 'list' }, [
+        return TNode.createElement('ul', { class: 'list', id: type }, [
             TNode.createElement('li', { class: 'item' }, [userInfo.username, type]),
             TNode.createElement('li', { class: 'item' }, [userInfo.sex]),
             TNode.createElement('li', { class: 'item' }, [userInfo.age])
