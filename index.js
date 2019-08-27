@@ -14,11 +14,14 @@ class App extends TComponent {
     }
 
     componentDidMount() {
-        this.setState(() => ({ type: 1 }));
+        setTimeout(() => {
+            this.setState(() => ({
+                type: 1
+            }));
+        }, 500);
     }
 
     render() {
-        // console.log(this);
         const { userInfo, type } = this.state;
 
         return TNode.createElement('ul', { class: 'list', id: type }, [
