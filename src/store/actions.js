@@ -1,0 +1,5 @@
+export const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
+export const UPDATE_USER_AGE = 'UPDATE_USER_AGE';
+
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const REVERSE_PRODUCT = 'REVERSE_PRODUCT';

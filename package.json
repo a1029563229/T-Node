@@ -8,7 +8,11 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@webassemblyjs/helper-code-frame": "^1.8.5",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
