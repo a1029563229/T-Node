@@ -11,12 +11,25 @@ class App extends TComponent {
     constructor(props) {
         super(props);
         store.subscribe(() => console.log(store.getState()));
-        setTimeout(() => {
-            store.dispatch({
-                type: ADD_PRODUCT,
-                payload: '某商品'
-            })
-        }, 500);
+        store.dispatch({
+            type: UPDATE_USER_AGE,
+            payload: 18
+        });
+        store.dispatch({
+            type: UPDATE_USER_NAME,
+            payload: 'jack'
+        });
+        store.dispatch({
+            type: ADD_PRODUCT,
+            payload: '某商品1'
+        });
+        store.dispatch({
+            type: ADD_PRODUCT,
+            payload: '某商品2'
+        });
+        store.dispatch({
+            type: REVERSE_PRODUCT
+        });
         this.state = {
             userInfo: {
                 username: 'jack',

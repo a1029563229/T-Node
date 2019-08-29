@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleWare } from '@/packages/tredux';
 import { userInfoReducer, productReducer } from './reducers';
 import {
   logger,
@@ -6,11 +6,12 @@ import {
 } from './middleWare';
 import thunk from 'redux-thunk';
 
+const middleWare = applyMiddleWare(thunk, logger, recorder);
+
 const reducers = combineReducers({
   user: userInfoReducer, 
   product: productReducer
 });
-const middleWare = applyMiddleware(thunk, logger, recorder);
 
 const store = createStore(reducers, middleWare);
 

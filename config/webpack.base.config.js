@@ -8,6 +8,11 @@ module.exports = {
         path: path.join(__dirname, '..', 'dist'),
         filename: 'webpack.bundle.js'
     },
+    resolve: {
+        alias: {
+            '@': path.join(__dirname, '..')
+        }
+    },
     module: {
         rules: [{
             test: /\.js$/,

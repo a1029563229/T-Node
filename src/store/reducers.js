@@ -7,7 +7,7 @@ import {
 
 export const userInfoReducer = (state = {}, action) => {
   switch (action.type) {
-    default: return { ...state };
+    default: return state;
     case UPDATE_USER_NAME:
       return {
         ...state,
@@ -23,7 +23,7 @@ export const userInfoReducer = (state = {}, action) => {
 
 export const productReducer = (state = [], action) => {
   switch (action.type) {
-    default: return [ ...state ];
+    default: return state;
     case ADD_PRODUCT:
       return [
         ...state,
