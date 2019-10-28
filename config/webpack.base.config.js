@@ -32,6 +32,7 @@ module.exports = {
         host: '0.0.0.0',
         port: '3500'
     },
+    stats: 'errors-only',
     plugins: [
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),

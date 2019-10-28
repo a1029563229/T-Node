@@ -27,15 +27,15 @@ function TElement(tag, props, children) {
     this.setTag(tag);
 }
 
-TElement.prototype.setTag = function(tag) {
-    if (typeof tag === 'string') {
-        this.tag = tag;
+TElement.prototype.setTag = function(tagOrCtr) {
+    if (typeof tagOrCtr === 'string') {
+        this.tag = tagOrCtr;
         this.tagType = TAG_TYPE.ELEMENT;
         return;
     }
-    this.tag = tag.name || tag.displayName;
+    this.tag = tagOrCtr.name || tagOrCtr.displayName;
     this.tagType = TAG_TYPE.COMPONENT;
-    this.Tag = tag;
+    this.Tag = tagOrCtr;
 }
 
 TElement.prototype.setAttributes = function() {

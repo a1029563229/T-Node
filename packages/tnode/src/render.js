@@ -12,6 +12,7 @@ function generateRootContainer() {
 function getDomTree(element, parentNode) {
     if (element.tagType === TAG_TYPE.COMPONENT) {
         // TComponent
+        // element.Tag 为 constructor
         element.ref = new element.Tag(element.props);
         element.ref.init();
         return getDomTree(element.ref.element);
