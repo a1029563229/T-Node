@@ -15,8 +15,8 @@ class Render {
   public run(): HTMLElement {
     const element = this.element;
     const domTree = this.getDomTree(element);
-    console.log(domTree);
     this.mountedNode.appendChild(domTree);
+    console.log(element);
     return this.mountedNode;
   }
 
