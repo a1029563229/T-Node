@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.join(__dirname, '..', './index.js'),
+    entry: path.join(__dirname, '..', './index.ts'),
     output: {
         path: path.join(__dirname, '..', 'dist'),
         filename: 'webpack.bundle.js'
@@ -14,17 +14,26 @@ module.exports = {
         }
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env'],
-                    plugins: ['@babel/transform-runtime']
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ['@babel/transform-runtime']
+                    }
+                }
+            },
+            {
+                test: /\.tsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'ts-loader'
                 }
             }
-        }]
+        ]
     },
     devServer: {
         hot: true,
