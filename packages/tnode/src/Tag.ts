@@ -1,11 +1,12 @@
 import { TAG_TYPE } from "./Element";
+import Component from "./Component";
 
 class Tag {
   public name: string;
   public type: TAG_TYPE;
-  private tagOrCtr: string | TComponent;
+  private tagOrCtr: string | Component;
 
-  constructor(tagOrCtr: string | TComponent) {
+  constructor(tagOrCtr: string | Component) {
     this.tagOrCtr = tagOrCtr;
     this.init();
   }
@@ -18,8 +19,10 @@ class Tag {
       return;
     }
 
-    if (tagOrCtr instanceof TComponent) {
-      this.name = tagOrCtr.name || tagOrCtr.displayName;
+    if (tagOrCtr instanceof Component) {
+      console.log(tagOrCtr)
+      console.log(tagOrCtr.constructor)
+      // this.name = tagOrCtr.name || tagOrCtr.displayName;
       this.type = TAG_TYPE.COMPONENT;
     }
   }

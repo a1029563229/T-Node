@@ -1,37 +1,18 @@
 import Updater from './updater';
+import Element from './element';
 
-export interface Props {}
+abstract class Component<S = {}, P = {}> {
+  protected state?: S;
+  protected props?: P;
+  // private updater?: Updater;
 
-class TComponent {
-    private props: Props;
-  
-    constructor(props, updater) {
-        this.props = props || {};
-        this.updater = {};
-        this.state = {};
-        this.element = {};
-    }
+  protected abstract componentDidMount?(): void;
+  protected abstract render?(): Element;
 
-    setState(partialState) {
-        let updateData;
-        if (typeof partialState === 'function') {
-            updateData = partialState();
-        } else {
-            updateData = partialState;
-        }
-
-        this.state = {
-            ...this.state,
-            ...updateData
-        }
-        this.updater.queueUpdate(this.render());
-    }
-
-    init() {
-        this.element = this.render();
-        const updater = new Updater(this.element);
-        this.updater = updater;
-    }
+  constructor(props: P, updater?: any) {
+    this.props = props;
+    // this.updater = {};
+  }
 }
 
-export default TComponent;
+export default Component;

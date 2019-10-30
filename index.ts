@@ -1,8 +1,16 @@
-import { TNode, TComponent } from './packages/tnode';
-import { TJX } from './packages/tjx';
+import TNode, { Component } from './packages/tnode';
 
-class App extends TComponent {
-    constructor(props) {
+type AppState = {
+    userInfo: {
+        username: string,
+        sex: string,
+        age: number
+    },
+    type: number
+}
+
+class App extends Component<AppState, {}> {
+    constructor(props: {}) {
         super(props);
         this.state = {
             userInfo: {
@@ -15,28 +23,19 @@ class App extends TComponent {
     }
 
     componentDidMount() {
-        setTimeout(() => {
-            this.setState(() => ({
-                type: 1
-            }));
-        }, 500);
+        console.log('componentDidMount');
     }
 
     render() {
-        const { userInfo, type } = this.state;
-
-        return new TJX(
-            `
-                <ul id="list">
-                    <li className='item'>{userInfo.username} {type}</li>
-                    <li className='item'>{userInfo.sex}</li>
-                    <li className='item'>{userInfo.age}</li>
-                </ul>
-            `
-        )
+        return TNode.createElement('ul', { id: 'list' }, [
+            TNode.createElement('li', { class: 'item' }, ['item1']),
+            TNode.createElement('li', { class: 'item' }, ['item2']),
+            TNode.createElement('li', { class: 'item' }, ['item3'])
+        ]);
     }
 }
 
 TNode.render(
-    TNode.createElement(App)
+    TNode.createElement(App as Component<AppState, {}>),
+    document.getElementById('root')
 );

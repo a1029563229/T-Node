@@ -9,6 +9,7 @@ module.exports = {
         filename: 'webpack.bundle.js'
     },
     resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
         alias: {
             '@': path.join(__dirname, '..')
         }

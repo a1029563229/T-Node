@@ -1,14 +1,14 @@
 import { isPrimitive } from './utils';
-import TElement from "./element";
+import Element from "./element";
 
 interface RenderItem {
-  render(element: TElement): HTMLElement;
+  render(element: Element): HTMLElement;
 }
 
 class ElementRenderItem implements RenderItem {
-  private element: TElement;
+  private element: Element;
   
-  public render(element: TElement): HTMLElement {
+  public render(element: Element): HTMLElement {
     this.element = element;
     const { tagName } = this.element;
     const htmlElement: HTMLElement = document.createElement(tagName);
@@ -26,7 +26,7 @@ class ElementRenderItem implements RenderItem {
   }
 
   private setText(node: HTMLElement): void {
-    this.element.children.forEach((child: string | TElement) => {
+    this.element.children.forEach((child: string | Element) => {
       if (isPrimitive(child)) {
         node.innerText += child;
       }
@@ -34,4 +34,10 @@ class ElementRenderItem implements RenderItem {
   }
 }
 
-export { RenderItem, ElementRenderItem }
+class ComponentRenderItem implements RenderItem {
+  public render(element: Element): HTMLElement {
+    return null;
+  }
+}
+
+export { RenderItem, ElementRenderItem, ComponentRenderItem }
