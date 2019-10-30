@@ -4,7 +4,7 @@ import Component from "./Component";
 class Tag {
   public name: string;
   public type: TAG_TYPE;
-  private tagOrCtr: string | Component;
+  public tagOrCtr: string | Component;
 
   constructor(tagOrCtr: string | Component) {
     this.tagOrCtr = tagOrCtr;
@@ -19,10 +19,8 @@ class Tag {
       return;
     }
 
-    if (tagOrCtr instanceof Component) {
-      console.log(tagOrCtr)
-      console.log(tagOrCtr.constructor)
-      // this.name = tagOrCtr.name || tagOrCtr.displayName;
+    if ((<typeof Component>tagOrCtr).tagType) {
+      this.name = tagOrCtr.name;
       this.type = TAG_TYPE.COMPONENT;
     }
   }

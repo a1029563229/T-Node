@@ -5,7 +5,7 @@ import { RenderItem } from './RenderItem';
 class Render {
   private element: Element;
   private mountedNode: HTMLElement;
-  private renderItems: { [key: number]: RenderItem };
+  private renderItems: RenderItem[] = [];
 
   constructor(element: Element, mountedNode: HTMLElement) {
     this.element = element;
@@ -15,6 +15,7 @@ class Render {
   public run(): HTMLElement {
     const element = this.element;
     const domTree = this.getDomTree(element);
+    console.log(domTree);
     this.mountedNode.appendChild(domTree);
     return this.mountedNode;
   }
@@ -30,12 +31,13 @@ class Render {
 
   private getDomTree(element: Element, parentNode?: HTMLElement): HTMLElement {
     const renderItem = this.renderItems[element.tagType] as RenderItem;
-    const htmlNode = element.el = renderItem.render(element);
-    parentNode && parentNode.appendChild(htmlNode);
+    let htmlNode = element.el = renderItem.render(element);
+    if (htmlNode && parentNode) parentNode.appendChild(htmlNode);
     if (element.children.some(ele => !isPrimitive(ele))) {
       element.children.forEach(child => {
         if (!isPrimitive(child)) {
-          this.getDomTree(child as Element, htmlNode);
+          const childNode = this.getDomTree(child as Element, htmlNode || parentNode);
+          htmlNode = htmlNode || childNode;
         }
       });
     }

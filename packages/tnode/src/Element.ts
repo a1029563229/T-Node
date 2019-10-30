@@ -19,6 +19,17 @@ class Element {
         this.tagType = tag.type;
         this.props = props;
         this.children = children;
+        this.init(tag);
+    }
+
+    private init(tag: Tag): void {
+        switch (this.tagType) {
+            default: break;
+            case TAG_TYPE.COMPONENT:
+                this.ref = new (<typeof Component>tag.tagOrCtr)();
+                this.children = [this.ref.render()];
+                break;
+        }
     }
 }
 

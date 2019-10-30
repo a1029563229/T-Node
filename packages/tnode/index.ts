@@ -9,11 +9,11 @@ function createElement(tag: string | Component, props?: {}, children?: (Element 
     return element;
 }
 
-function render(element: Element, mountedNode: HTMLElement) {
+function render(element: Element, mountedNode: HTMLElement): HTMLElement {
     const render = new Render(element, mountedNode);
     render.addRenderItem(TAG_TYPE.ELEMENT, new ElementRenderItem());
     render.addRenderItem(TAG_TYPE.COMPONENT, new ComponentRenderItem());
-    return render;
+    return render.run();
 }
 
 export default {

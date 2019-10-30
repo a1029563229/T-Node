@@ -1,15 +1,17 @@
 import Updater from './updater';
-import Element from './element';
+import Element, { TAG_TYPE } from './element';
 
-abstract class Component<S = {}, P = {}> {
+class Component<S = {}, P = {}> {
+  public static tagType?: TAG_TYPE = TAG_TYPE.COMPONENT;
+  public name?: string;
   protected state?: S;
   protected props?: P;
   // private updater?: Updater;
 
-  protected abstract componentDidMount?(): void;
-  protected abstract render?(): Element;
+  protected componentDidMount?(): void;
+  public render?(): Element;
 
-  constructor(props: P, updater?: any) {
+  constructor(props?: P, updater?: any) {
     this.props = props;
     // this.updater = {};
   }
