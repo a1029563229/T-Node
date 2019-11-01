@@ -1,4 +1,6 @@
 import TNode, { Component } from './packages/tnode';
+import Tjx from './index.tjx';
+console.log({ Tjx });
 
 type AppState = {
     userInfo: {

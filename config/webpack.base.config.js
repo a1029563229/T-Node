@@ -14,6 +14,12 @@ module.exports = {
             '@': path.join(__dirname, '..')
         }
     },
+    resolveLoader: {// 配置查找loader的目录
+        modules: [
+            'node_modules',
+            path.resolve(__dirname, '../', './packages')
+        ]
+    },
     module: {
         rules: [
             {
@@ -32,6 +38,13 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'ts-loader'
+                }
+            },
+            {
+                test: /.tjx$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'tjx-loader'
                 }
             }
         ]
