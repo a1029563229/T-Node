@@ -2,16 +2,12 @@ import { isPrimitive } from './utils';
 import Element from "./element";
 import { Component } from '..';
 
-class RenderBasic {
-  willMounted(): void {};
-  mounted(): void {};
-}
-
 interface RenderItem {
+  component?: Component;
   render(element: Element): HTMLElement;
 }
 
-class ElementRenderItem extends RenderBasic implements RenderItem {
+class ElementRenderItem implements RenderItem {
   private element: Element;
 
   public render(element: Element): HTMLElement {
@@ -40,23 +36,16 @@ class ElementRenderItem extends RenderBasic implements RenderItem {
   }
 }
 
-class ComponentRenderItem extends RenderBasic implements RenderItem {
-  private component: Component;
+class ComponentRenderItem implements RenderItem {
+  component: Component;
   
   public render(element: Element): HTMLElement {
     const Ctr = <typeof Component>element.tag.Ctr;
     element.ref = this.component = new Ctr();
+    this.component.componentWillMount && this.component.componentWillMount();
     element.children = [element.ref.render()];
     return null;
   }
-
-  willMounted() {
-    this.component.componentWillMount && this.component.componentWillMount();
-  }
-
-  mounted() {
-    this.component.componentDidMount && this.component.componentDidMount();
-  }
 }
 
-export { RenderItem, RenderBasic, ElementRenderItem, ComponentRenderItem }
+export { RenderItem, ElementRenderItem, ComponentRenderItem }
