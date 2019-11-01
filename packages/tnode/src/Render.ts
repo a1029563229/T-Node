@@ -30,7 +30,7 @@ class Render {
   }
 
   private getDomTree(element: Element, parentNode?: HTMLElement): HTMLElement {
-    const renderItem = this.renderItems[element.tagType] as RenderItem;
+    const renderItem = this.renderItems[element.tag.type] as RenderItem;
     let htmlNode = element.el = renderItem.render(element);
     if (htmlNode && parentNode) parentNode.appendChild(htmlNode);
     if (element.children.some(ele => !isPrimitive(ele))) {

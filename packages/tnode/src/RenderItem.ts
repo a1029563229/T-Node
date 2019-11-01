@@ -1,5 +1,6 @@
 import { isPrimitive } from './utils';
 import Element from "./element";
+import { Component } from '..';
 
 interface RenderItem {
   render(element: Element): HTMLElement;
@@ -7,10 +8,10 @@ interface RenderItem {
 
 class ElementRenderItem implements RenderItem {
   private element: Element;
-  
+
   public render(element: Element): HTMLElement {
     this.element = element;
-    const { tagName } = this.element;
+    const { name: tagName } = this.element.tag;
     const htmlElement: HTMLElement = document.createElement(tagName);
     this.setAttributes(htmlElement);
     this.setText(htmlElement);
@@ -36,6 +37,9 @@ class ElementRenderItem implements RenderItem {
 
 class ComponentRenderItem implements RenderItem {
   public render(element: Element): HTMLElement {
+    const Ctr = <typeof Component>element.tag.Ctr;
+    element.ref = new Ctr();
+    element.children = [element.ref.render()];
     return null;
   }
 }
