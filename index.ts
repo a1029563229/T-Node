@@ -22,8 +22,14 @@ class App extends Component<AppState, {}> {
         };
     }
 
+    componentWillMount() {
+        console.log('componentWillMount');
+        console.log(document.querySelector('ul'));
+    }
+
     componentDidMount() {
         console.log('componentDidMount');
+        console.log(document.querySelector('ul'));
     }
 
     render() {

@@ -8,7 +8,8 @@ class Component<S = {}, P = {}> {
   protected props?: P;
   // private updater?: Updater;
   
-  protected componentDidMount?(): void;
+  public componentWillMount?(): void;
+  public componentDidMount?(): void;
   public render?(): Element;
 
   constructor(props?: P, updater?: any) {
