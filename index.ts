@@ -1,6 +1,5 @@
 import TNode, { Component } from './packages/tnode';
 import Tjx from './index.tjx';
-console.log({ Tjx });
 
 type AppState = {
     userInfo: {
@@ -32,6 +31,7 @@ class App extends Component<AppState, {}> {
     componentDidMount() {
         console.log('componentDidMount');
         console.log(document.querySelector('ul'));
+        console.log(Tjx);
     }
 
     render() {
