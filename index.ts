@@ -1,5 +1,5 @@
 import TNode, { Component } from './packages/tnode';
-import Tjx from './index.tjx';
+import Index from './index.tjx';
 
 type AppState = {
     userInfo: {
@@ -25,21 +25,15 @@ class App extends Component<AppState, {}> {
 
     componentWillMount() {
         console.log('componentWillMount');
-        console.log(document.querySelector('ul'));
     }
 
     componentDidMount() {
         console.log('componentDidMount');
-        console.log(document.querySelector('ul'));
-        console.log(Tjx);
+        console.log(document.querySelector('.container'));
     }
 
     render() {
-        return TNode.createElement('ul', { id: 'list' }, [
-            TNode.createElement('li', { class: 'item' }, ['item1']),
-            TNode.createElement('li', { class: 'item' }, ['item2']),
-            TNode.createElement('li', { class: 'item' }, ['item3'])
-        ]);
+        return Index
     }
 }
 

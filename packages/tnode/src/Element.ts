@@ -6,10 +6,12 @@ export enum TAG_TYPE {
     COMPONENT
 }
 
+export type Props = { [key: string]: any };
+
 class Element {
     public el: HTMLElement;
     public tag: Tag;
-    public props: { [key: string]: any };
+    public props: Props;
     public children: (Element | string)[] = [];
     public ref: Component;
 

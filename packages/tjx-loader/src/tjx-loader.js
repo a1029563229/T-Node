@@ -68,5 +68,5 @@ class Parser {
 module.exports = function (source) {
   const parser = new Parser();
   const virtualDomTree = JSON.stringify(parser.run(source));
-  return virtualDomTree;
+  return `export default ${virtualDomTree}`
 }
