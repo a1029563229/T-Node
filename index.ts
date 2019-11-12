@@ -25,11 +25,18 @@ class App extends Component<AppState, {}> {
 
     componentWillMount() {
         console.log('componentWillMount');
+        console.log(Index);
+        const render = () => {
+            const message = 'test';
+            return () => {
+                const data = eval(`console.log(message)`);
+            }
+        }
+        render()();
     }
 
     componentDidMount() {
         console.log('componentDidMount');
-        console.log(document.querySelector('.container'));
     }
 
     render() {

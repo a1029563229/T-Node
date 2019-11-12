@@ -1,10 +1,11 @@
 const tjxLoader = require('./tjx-loader');
 
-const tjxStr = `<section className='container' id='test'>
+const tjxStr = `<section className='container'>
+<h1>标题</h1>
 <ul id='list'>
-  <li className='item'>item1</li>
-  <li className='item'>item2</li>
-  <li className='item'>item3</li>
+  <li className='item'>{userInfo.name}</li>
+  <li className='item'>{userInfo.sex}</li>
+  <li className='item'>{userInfo.age}</li>
 </ul>
 </section>`;
 

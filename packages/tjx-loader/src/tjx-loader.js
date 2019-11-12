@@ -1,3 +1,5 @@
+const ast = require('./ast')
+
 class Parser {
   constructor() {
     this.elOList = [];
@@ -41,7 +43,7 @@ class Parser {
     const tagNameRE = /\w+/;
     const propsRE = /\w+='?\w+'?/g;
     const tagName = tag.match(tagNameRE)[0];
-    const props = tag.match(propsRE);
+    const props = tag.match(propsRE) || [];
     element.name = tagName;
     element.props = props.map(prop => ({ [prop.match(/^\w+/)[0]]: prop.match(/(?<==')\w+(?=('|"))/)[0] }))
     element.children = [];
@@ -49,12 +51,14 @@ class Parser {
   }
 
   buildCloseTag(str, tagStr) {
-    const context = str.match(/^[\w\d]+/);
+    const context = str.match(/.*?(?=<)/);
     const element = this.elOList.pop();
     let leftStr, content = '';
-    if (context) {
+    // 匹配到内容则将内容（纯文本）添加到该节点的子节点
+    if (context[0]) {
       content = context[0];
-      element.children.push(content)
+      element.children.push(this.parseContent(content))
+    // 未匹配到内容则表示该标签需要关闭，将此前所有的子标签添加至该节点的子节点中完成关闭动作
     } else {
       const children = this.elCList[this.deep + 1];
       element.children = element.children.concat(children);
@@ -62,6 +66,15 @@ class Parser {
     this.elCList[this.deep] = [...(this.elCList[this.deep--] || []), element];
     leftStr = str.slice(tagStr.length + content.length + 2, str.length).trim();
     this.matchStr(leftStr);
+  }
+
+  parseContent(contentStr) {
+    const expressionStrRE = /(?<={).*?(?=})/;
+    const expressionStrs = contentStr.match(expressionStrRE);
+    if (!expressionStrs) return contentStr;
+    const [expressionStr] = expressionStrs;
+    const expression = ast(expressionStr);
+    return expression;
   }
 }
 
