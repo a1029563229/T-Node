@@ -1,0 +1,5 @@
+const tjxLoader = require('./tjx-element-loader');
+
+const tjxStr = '[{"name":"section","props":[{"className":"container"}],"children":[{"name":"h1","props":[],"children":["标题"]},{"name":"ul","props":[{"id":"list"}],"children":[{"name":"li","props":[{"className":"item"}],"children":[{"type":"ExpressionStatement","expression":{"type":"MemberExpression","object":{"type":"Identifier","name":"userInfo"},"property":{"type":"Identifier","name":"name"},"computed":false}}]},{"name":"li","props":[{"className":"item"}],"children":[{"type":"ExpressionStatement","expression":{"type":"MemberExpression","object":{"type":"Identifier","name":"userInfo"},"property":{"type":"Identifier","name":"sex"},"computed":false}}]},{"name":"li","props":[{"className":"item"}],"children":[{"type":"ExpressionStatement","expression":{"type":"MemberExpression","object":{"type":"Identifier","name":"userInfo"},"property":{"type":"Identifier","name":"age"},"computed":false}}]}]}]}]';
+
+console.log(tjxLoader(tjxStr));

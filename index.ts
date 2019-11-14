@@ -1,4 +1,5 @@
-import TNode, { Component } from './packages/tnode';
+import TNode, { Component, createElement } from './packages/tnode';
+
 import Index from './index.tjx';
 
 type AppState = {
@@ -25,14 +26,6 @@ class App extends Component<AppState, {}> {
 
     componentWillMount() {
         console.log('componentWillMount');
-        console.log(Index);
-        const render = () => {
-            const message = 'test';
-            return () => {
-                const data = eval(`console.log(message)`);
-            }
-        }
-        render()();
     }
 
     componentDidMount() {
@@ -40,7 +33,10 @@ class App extends Component<AppState, {}> {
     }
 
     render() {
-        return Index
+        const { userInfo } = this.state;
+        console.log(Index)
+        eval(`Index()`)
+        return null
     }
 }
 

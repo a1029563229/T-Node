@@ -1,3 +1,4 @@
+const { getOptions } = require('loader-utils');
 const ast = require('./ast')
 
 class Parser {
@@ -58,7 +59,7 @@ class Parser {
     if (context[0]) {
       content = context[0];
       element.children.push(this.parseContent(content))
-    // 未匹配到内容则表示该标签需要关闭，将此前所有的子标签添加至该节点的子节点中完成关闭动作
+      // 未匹配到内容则表示该标签需要关闭，将此前所有的子标签添加至该节点的子节点中完成关闭动作
     } else {
       const children = this.elCList[this.deep + 1];
       element.children = element.children.concat(children);
@@ -78,8 +79,10 @@ class Parser {
   }
 }
 
-module.exports = function (source) {
+module.exports = function (source, a, b) {
+  const options = getOptions(this);
+  const { plain } = options;
   const parser = new Parser();
   const virtualDomTree = JSON.stringify(parser.run(source));
-  return `export default ${virtualDomTree}`
+  return plain ? virtualDomTree : `export default ${virtualDomTree}`
 }

@@ -1,7 +1,6 @@
 import { isPrimitive } from './utils';
 import Element from "./element";
 import { Component } from '..';
-import ElementParser from './ElementParser';
 
 interface RenderItem {
   component?: Component;
@@ -45,8 +44,7 @@ class ComponentRenderItem implements RenderItem {
     element.ref = this.component = new Ctr();
     this.component.componentWillMount && this.component.componentWillMount();
     const nodes = element.ref.render();
-    let elements = Array.isArray(nodes) ? new ElementParser(nodes).toElement() : [nodes];
-    element.children = elements as Element[];
+    element.children = [nodes];
     return null;
   }
 }

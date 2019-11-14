@@ -1,6 +1,5 @@
 import Updater from './updater';
 import Element, { TAG_TYPE } from './element';
-import { PureNode } from './ElementParser';
 
 class Component<S = {}, P = {}> {
   public static type?: TAG_TYPE = TAG_TYPE.COMPONENT;
@@ -11,7 +10,7 @@ class Component<S = {}, P = {}> {
   
   public componentWillMount?(): void;
   public componentDidMount?(): void;
-  public render?(): Element | PureNode[];
+  public render?(): Element;
 
   constructor(props?: P, updater?: any) {
     this.props = props;

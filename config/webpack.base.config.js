@@ -43,9 +43,17 @@ module.exports = {
             {
                 test: /.tjx$/,
                 exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'tjx-loader'
-                }
+                use: [
+                    {
+                        loader: 'tjx-element-loader'
+                    },
+                    {
+                        loader: 'tjx-loader',
+                        options: {
+                            plain: true
+                        }
+                    }
+                ]
             }
         ]
     },

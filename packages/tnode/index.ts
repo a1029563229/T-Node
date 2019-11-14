@@ -25,5 +25,6 @@ export default {
 
 export {
     Element,
-    Component
+    Component,
+    createElement
 }
