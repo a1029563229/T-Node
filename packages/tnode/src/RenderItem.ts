@@ -44,6 +44,7 @@ class ComponentRenderItem implements RenderItem {
     element.ref = this.component = new Ctr();
     this.component.componentWillMount && this.component.componentWillMount();
     const nodes = element.ref.render();
+    console.log({ nodes });
     element.children = [nodes];
     return null;
   }

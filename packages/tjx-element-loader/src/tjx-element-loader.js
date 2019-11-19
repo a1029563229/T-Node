@@ -5,7 +5,7 @@ class Parser {
   constructor() {
 
   }
-  
+
   run(virtualDom) {
     let elementTree = this.getElementTree(virtualDom[0]);
     const code = escodegen.generate(elementTree).replace(/;/g, "");
@@ -15,7 +15,7 @@ class Parser {
   getElementTree(virtualDom) {
     if (typeof virtualDom === 'string') {
       return ast(`'${virtualDom}'`);
-    } 
+    }
 
     if (virtualDom.type) return virtualDom
 
@@ -31,7 +31,7 @@ class Parser {
         elements.push(this.getElementTree(child));
       })
     }
-    
+
     return et;
   }
 
@@ -50,5 +50,5 @@ class Parser {
 module.exports = function (source) {
   const parser = new Parser();
   const tElement = parser.run(JSON.parse(source));
-  return `export default () => ${tElement}`
+  return tElement
 }

@@ -10,7 +10,7 @@ class Component<S = {}, P = {}> {
   
   public componentWillMount?(): void;
   public componentDidMount?(): void;
-  public render?(): Element;
+  public render?(): Element | string;
 
   constructor(props?: P, updater?: any) {
     this.props = props;

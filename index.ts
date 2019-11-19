@@ -1,7 +1,5 @@
 import TNode, { Component, createElement } from './packages/tnode';
 
-import Index from './index.tjx';
-
 type AppState = {
     userInfo: {
         username: string,
@@ -34,9 +32,16 @@ class App extends Component<AppState, {}> {
 
     render() {
         const { userInfo } = this.state;
-        console.log(Index)
-        eval(`Index()`)
-        return null
+        return `
+            <section className='container'>
+                <h1>标题</h1>
+                <ul id='list'>
+                <li className='item'>{userInfo.username}</li>
+                <li className='item'>{userInfo.sex}</li>
+                <li className='item'>{userInfo.age + ''}</li>
+                </ul>
+            </section>
+            `
     }
 }
 

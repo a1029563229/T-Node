@@ -1,4 +1,5 @@
 const { getOptions } = require('loader-utils');
+const TjxElementLoader = require("../../tjx-element-loader/src/tjx-element-loader");
 const ast = require('./ast')
 
 class Parser {
@@ -10,7 +11,7 @@ class Parser {
   }
 
   run(htmlStr) {
-    this.matchStr(htmlStr.replace(/\n/g, ''));
+    this.matchStr(htmlStr.replace(/\n/g, '').trim());
     return this.virtualDom;
   }
 
@@ -79,10 +80,18 @@ class Parser {
   }
 }
 
-module.exports = function (source, a, b) {
-  const options = getOptions(this);
-  const { plain } = options;
+module.exports = function (source) {
+  const domStr = source;
+  const dom = domStr.match(/(?<=return `)[\s\S]*(?=`)/)
+  // 不包含 tjx 语法
+  if (!dom) return source;
+
+  const tjx = dom[0];
   const parser = new Parser();
-  const virtualDomTree = JSON.stringify(parser.run(source));
-  return plain ? virtualDomTree : `export default ${virtualDomTree}`
+  // 解析为虚拟 DOM 树
+  const virtualDomTree = JSON.stringify(parser.run(tjx));
+  // 将虚拟 DOM 树（包含 AST 语法）编译成 ES 语法，注入到源文件中
+  const element = TjxElementLoader(virtualDomTree);
+  const output = domStr.replace(/(?<=return )`[\s\S]*`(?=)/, element)
+  return output;
 }

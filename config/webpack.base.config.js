@@ -36,9 +36,17 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'ts-loader'
-                }
+                use: [
+                    {
+                        loader: 'ts-loader'
+                    },
+                    {
+                        loader: 'tjx-loader',
+                        options: {
+                            plain: true
+                        }
+                    }
+                ]
             },
             {
                 test: /.tjx$/,
