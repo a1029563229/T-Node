@@ -39,6 +39,8 @@ class App extends Component<AppState, {}> {
                 <li className='item'>{userInfo.username}</li>
                 <li className='item'>{userInfo.sex}</li>
                 <li className='item'>{userInfo.age + ''}</li>
+                <li className='item'>{true ? "正确值" : "错误值"}</li>
+                <li className='item'>{false ? "正确值" : "错误值"}</li>
                 </ul>
             </section>
             `
